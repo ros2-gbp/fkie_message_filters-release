@@ -2,6 +2,12 @@
 Changelog for package fkie_message_filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.0.2 (2025-04-16)
+------------------
+* Use tf2_ros native function for timestamp conversions
+* Inherit additional constructors for Buffer, Sequencer, and TfFilter
+* Contributors: Timo Röhling
+
 3.0.1 (2025-04-13)
 ------------------
 * Recheck image_transport version when library is used
