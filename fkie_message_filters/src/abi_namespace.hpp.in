@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +19,7 @@
  *
  ****************************************************************************/
 #ifndef FKIE_MF_BEGIN_ABI_NAMESPACE
-#define FKIE_MF_BEGIN_ABI_NAMESPACE \
-    inline namespace abi2           \
-    {
+#define FKIE_MF_BEGIN_ABI_NAMESPACE inline namespace abi@FKIE_MF_ABI_VERSION@ {
 #endif
 #ifndef FKIE_MF_END_ABI_NAMESPACE
 #define FKIE_MF_END_ABI_NAMESPACE }
