@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,11 +71,11 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS publisher options
      *
-     * \nothrow
+     * \rmwthrow
      */
     ImagePublisher(rclcpp::Node::SharedPtr& node, const std::string& base_topic,
                    const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-                   const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions()) noexcept;
+                   const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions());
     /** \brief Destructor. */
     virtual ~ImagePublisher();
     /** \brief Check if the ROS publisher has at least one subscriber.
@@ -97,15 +98,15 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS publisher options
      *
-     * \nothrow
+     * \rmwthrow
      */
     void advertise(rclcpp::Node::SharedPtr& node, const std::string& base_topic,
                    const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-                   const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions()) noexcept;
+                   const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions());
 
 protected:
     /** \private */
-    void receive(helpers::argument_t<typename Translate<sensor_msgs::msg::Image>::FilterType>) noexcept override;
+    void receive(helpers::argument_t<typename Translate<sensor_msgs::msg::Image>::FilterType>) override;
 
 private:
     image_transport::Publisher pub_;

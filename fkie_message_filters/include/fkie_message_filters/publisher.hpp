@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +27,6 @@
 #include "publisher_base.hpp"
 #include "source.hpp"
 
-#include <rclcpp/node.hpp>
-
 namespace fkie_message_filters
 {
 
@@ -49,8 +48,8 @@ FKIE_MF_BEGIN_ABI_NAMESPACE
  *
  * \sa CameraPublisher, ImagePublisher
  */
-template<class M, template<typename> class Translate = RosMessageSharedPtr>
-class Publisher : public PublisherBase, public Sink<typename Translate<M>::FilterType>
+template<class M, template<typename, typename> class Translate = RosMessageSharedPtr, class A = std::allocator<void>>
+class Publisher : public PublisherBase, public Sink<typename Translate<M, A>::FilterType>
 {
 public:
     /** \brief Constructs an empty publisher.
@@ -64,11 +63,12 @@ public:
      *
      * The constructor calls advertise() for you.
      *
-     * \nothrow
+     * \rmwthrow
      */
-    Publisher(rclcpp::Node::SharedPtr& node, const std::string& topic,
+    template<class NodeT>
+    Publisher(NodeT&& node, const std::string& topic,
               const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-              const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions()) noexcept;
+              const rclcpp::PublisherOptionsWithAllocator<A>& options = rclcpp::PublisherOptionsWithAllocator<A>());
     /** \brief Destructor. */
     virtual ~Publisher();
     /** \brief Check if the ROS publisher has at least one subscriber.
@@ -96,19 +96,21 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS publisher options
      *
-     * \nothrow
+     * \rmwthrow
      */
-    void advertise(rclcpp::Node::SharedPtr& node, const std::string& topic,
-                   const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-                   const rclcpp::PublisherOptions& options = rclcpp::PublisherOptions()) noexcept;
+    template<class NodeT>
+    void
+    advertise(NodeT&& node, const std::string& topic,
+              const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
+              const rclcpp::PublisherOptionsWithAllocator<A>& options = rclcpp::PublisherOptionsWithAllocator<A>());
 
 protected:
     /** \private */
-    virtual void receive(helpers::argument_t<typename Translate<M>::FilterType> m) noexcept override;
+    virtual void receive(helpers::argument_t<typename Translate<M, A>::FilterType> m) override;
 
 private:
-    using MessageType = typename Translate<M>::MessageType;
-    using PublisherROS = typename Translate<M>::Publisher;
+    using MessageType = typename Translate<M, A>::MessageType;
+    using PublisherROS = typename Translate<M, A>::Publisher;
     typename PublisherROS::SharedPtr pub_;
 };
 
