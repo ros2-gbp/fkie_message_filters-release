@@ -3,6 +3,7 @@
 # fkie_message_filters
 # Copyright © 2018-2025 Fraunhofer FKIE
 # Author: Timo Röhling
+# SPDX-License-Identifier: Apache-2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +20,8 @@
 ############################################################################
 
 cmake_minimum_required(VERSION 3.13...3.28)
-project(fkie_message_filters VERSION 3.0.2)
-set(FKIE_MF_ABI_VERSION 2)
+project(fkie_message_filters VERSION 3.2.0)
+set(FKIE_MF_ABI_VERSION 3)
 
 # Options
 option(BUILD_SHARED_LIBS "Build shared library" ON)
@@ -44,6 +45,7 @@ target_include_directories(
     ${PROJECT_NAME}
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
            $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+           $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include/helpers>
            $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(
@@ -77,11 +79,16 @@ math(
 configure_file(
     src/version.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/include/version.hpp @ONLY
 )
+configure_file(
+    src/abi_namespace.hpp.in
+    ${CMAKE_CURRENT_BINARY_DIR}/include/helpers/abi_namespace.hpp @ONLY
+)
 
 # Testing
 if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
     find_package(ament_cmake_ros REQUIRED)
+    find_package(rclcpp_lifecycle REQUIRED)
     find_package(std_msgs REQUIRED)
     ament_add_ros_isolated_gtest(
         filtertests
@@ -122,7 +129,9 @@ if(BUILD_TESTING)
             message(FATAL_ERROR "Cannot enable test coverage: gcov not found")
         endif()
     endif()
-    target_link_libraries(filtertests ${PROJECT_NAME})
+    target_link_libraries(
+        filtertests ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle
+    )
     if(TARGET Boost::boost)
         target_link_libraries(filtertests Boost::boost)
     endif()
@@ -151,7 +160,7 @@ install(
 )
 
 install(DIRECTORY include/ DESTINATION include)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/version.hpp
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/
         DESTINATION include/${PROJECT_NAME}
 )
 

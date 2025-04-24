@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +27,8 @@
 #include "source.hpp"
 #include "subscriber_base.hpp"
 
-#include <rclcpp/node.hpp>
+#include <rclcpp/node_interfaces/node_parameters_interface.hpp>
+#include <rclcpp/node_interfaces/node_topics_interface.hpp>
 
 namespace fkie_message_filters
 {
@@ -50,8 +52,8 @@ FKIE_MF_BEGIN_ABI_NAMESPACE
  *
  * \sa CameraSubscriber, ImageSubscriber
  */
-template<class M, template<typename> class Translate = RosMessageSharedPtr>
-class Subscriber : public SubscriberBase, public Source<typename Translate<M>::FilterType>
+template<class M, template<typename, typename> class Translate = RosMessageSharedPtr, class A = std::allocator<void>>
+class Subscriber : public SubscriberBase, public Source<typename Translate<M, A>::FilterType>
 {
 public:
     /** \brief Constructs an empty subscriber.
@@ -71,11 +73,13 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS subscription options
      *
-     * \nothrow
+     * \rmwthrow
      */
-    Subscriber(const rclcpp::Node::SharedPtr& node, const std::string& topic,
-               const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-               const rclcpp::SubscriptionOptions& options = rclcpp::SubscriptionOptions()) noexcept;
+    template<class NodeT>
+    Subscriber(
+        NodeT&& node, const std::string& topic,
+        const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
+        const rclcpp::SubscriptionOptionsWithAllocator<A>& options = rclcpp::SubscriptionOptionsWithAllocator<A>());
     /** \brief Configure ROS topic that is to be subscribed.
      *
      * All arguments are passed to the ROS client library; see the ROS documentation for further information. Calling
@@ -86,11 +90,13 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS subscription options
      *
-     * \nothrow
+     * \rmwthrow
      */
-    void set_subscribe_options(const rclcpp::Node::SharedPtr& node, const std::string& topic,
-                               const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-                               const rclcpp::SubscriptionOptions& options = rclcpp::SubscriptionOptions()) noexcept;
+    template<class NodeT>
+    void set_subscribe_options(
+        NodeT&& node, const std::string& topic,
+        const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
+        const rclcpp::SubscriptionOptionsWithAllocator<A>& options = rclcpp::SubscriptionOptionsWithAllocator<A>());
     /** \brief Convenience function to subscribe to a ROS topic.
      *
      * This function is equivalent to calling set_subscribe_options() and then subscribe().
@@ -100,11 +106,13 @@ public:
      * \arg \c qos the ROS quality of service specification
      * \arg \c options ROS subscription options
      *
-     * \nothrow
+     * \rmwthrow
      */
-    void subscribe(const rclcpp::Node::SharedPtr& node, const std::string& topic,
-                   const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
-                   const rclcpp::SubscriptionOptions& options = rclcpp::SubscriptionOptions()) noexcept;
+    template<class NodeT>
+    void subscribe(
+        NodeT&& node, const std::string& topic,
+        const rclcpp::QoS& qos = rclcpp::QoS(rclcpp::KeepLast(10), rmw_qos_profile_default),
+        const rclcpp::SubscriptionOptionsWithAllocator<A>& options = rclcpp::SubscriptionOptionsWithAllocator<A>());
     using SubscriberBase::subscribe;
     using SubscriberBase::subscribe_on_demand;
     using SubscriberBase::unsubscribe;
@@ -128,15 +136,16 @@ protected:
     virtual void unsubscribe_impl() noexcept override;
 
 private:
-    using MessageType = typename Translate<M>::MessageType;
-    using FilterType = typename Translate<M>::FilterType;
+    using MessageType = typename Translate<M, A>::MessageType;
+    using FilterType = typename Translate<M, A>::FilterType;
     using SubscriptionType = typename M::UniquePtr;
     using SubscriptionCB = std::function<void(SubscriptionType)>;
-    using Subscription = rclcpp::Subscription<MessageType>;
-    rclcpp::Node::SharedPtr node_;
+    using Subscription = rclcpp::Subscription<MessageType, A>;
+    rclcpp::node_interfaces::NodeParametersInterface::SharedPtr node_parameters_;
+    rclcpp::node_interfaces::NodeTopicsInterface::SharedPtr node_topics_;
     std::string topic_;
     rclcpp::QoS qos_{rclcpp::KeepLast(10), rmw_qos_profile_default};
-    rclcpp::SubscriptionOptions options_;
+    rclcpp::SubscriptionOptionsWithAllocator<A> options_;
     typename Subscription::SharedPtr sub_;
 };
 
