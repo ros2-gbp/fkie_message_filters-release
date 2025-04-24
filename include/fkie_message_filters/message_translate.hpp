@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +34,14 @@ namespace fkie_message_filters
 
 FKIE_MF_BEGIN_ABI_NAMESPACE
 
-template<class M>
+template<class M, class A = std::allocator<void>>
 struct RosMessage
 {
     using MessageType = M;
     using FilterType = M;
-    using Publisher = rclcpp::Publisher<MessageType>;
+    using AllocatorType = A;
+    using Publisher = rclcpp::Publisher<MessageType, AllocatorType>;
+    using PublisherOptions = rclcpp::PublisherOptionsWithAllocator<AllocatorType>;
 
     static MessageType create()
     {
@@ -62,12 +65,14 @@ struct RosMessage
     }
 };
 
-template<class M>
+template<class M, class A = std::allocator<void>>
 struct RosMessageUniquePtr
 {
     using MessageType = M;
     using FilterType = typename M::UniquePtr;
-    using Publisher = rclcpp::Publisher<MessageType>;
+    using AllocatorType = A;
+    using Publisher = rclcpp::Publisher<MessageType, AllocatorType>;
+    using PublisherOptions = rclcpp::PublisherOptionsWithAllocator<AllocatorType>;
 
     static typename MessageType::UniquePtr create()
     {
@@ -86,12 +91,14 @@ struct RosMessageUniquePtr
     }
 };
 
-template<class M>
+template<class M, class A = std::allocator<void>>
 struct RosMessageSharedPtr
 {
     using MessageType = M;
     using FilterType = typename M::ConstSharedPtr;
-    using Publisher = rclcpp::Publisher<MessageType>;
+    using AllocatorType = A;
+    using Publisher = rclcpp::Publisher<MessageType, AllocatorType>;
+    using PublisherOptions = rclcpp::PublisherOptionsWithAllocator<AllocatorType>;
 
     static typename MessageType::SharedPtr create()
     {
