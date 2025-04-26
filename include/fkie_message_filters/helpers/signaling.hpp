@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -179,6 +180,7 @@ public:
 
     void disconnect_all_slots() noexcept
     {
+        std::lock_guard<std::mutex> lock{slot_mutex_};
         for (Slot& slot : slots_)
         {
             slot.priv->owner = nullptr;
