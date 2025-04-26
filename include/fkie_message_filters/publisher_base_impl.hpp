@@ -18,35 +18,35 @@
  * limitations under the License.
  *
  ****************************************************************************/
+#ifndef INCLUDE_FKIE_MESSAGE_FILTERS_PUBLISHER_BASE_IMPL_HPP_
+#define INCLUDE_FKIE_MESSAGE_FILTERS_PUBLISHER_BASE_IMPL_HPP_
+#pragma once
 
-#include <fkie_message_filters/logging.hpp>
+// IWYU pragma: private; include "publisher_base.hpp"
+
+#include "publisher_base.hpp"
+
+#include <rclcpp/node_interfaces/get_node_graph_interface.hpp>
 
 namespace fkie_message_filters
 {
 
 FKIE_MF_BEGIN_ABI_NAMESPACE
 
-#ifndef DOXYGEN
-rclcpp::Logger logger_ = rclcpp::get_logger("fkie_message_filters");
-#endif
-
-void set_logger(const std::string& name)
+template<class NodeT, typename std::enable_if_t<
+                          !std::is_convertible_v<NodeT, rclcpp::node_interfaces::NodeGraphInterface::SharedPtr>, bool>>
+void PublisherBase::start_monitor(NodeT&& node) noexcept
 {
-    logger_ = rclcpp::get_logger(name);
-}
-
-void set_logger(const rclcpp::Node::SharedPtr& node, const std::string& name)
-{
-    if (name.empty())
-        logger_ = node->get_logger();
-    else
-        logger_ = node->get_logger().get_child(name);
-}
-
-const rclcpp::Logger& get_logger() noexcept
-{
-    return logger_;
+    if (node)
+    {
+        rclcpp::node_interfaces::NodeGraphInterface::SharedPtr node_graph_interface =
+            rclcpp::node_interfaces::get_node_graph_interface(node);
+        start_monitor(node_graph_interface);
+    }
 }
 
 FKIE_MF_END_ABI_NAMESPACE
+
 }  // namespace fkie_message_filters
+
+#endif
