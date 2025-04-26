@@ -1,3 +1,26 @@
+## fkie_message_filters (kilted) - 3.2.0-1
+
+The packages in the `fkie_message_filters` repository were released into the `kilted` distro by running `/home/cottsay/infra_ws/install/bloom/bin/bloom-release fkie_message_filters -r kilted` on `Sat, 26 Apr 2025 19:05:05 -0000`
+
+The `fkie_message_filters` package was released.
+
+Version of package(s) in repository `fkie_message_filters`:
+
+- upstream repository: https://github.com/fkie/message_filters.git
+- release repository: https://github.com/ros2-gbp/fkie_message_filters-release.git
+- rosdistro version: `3.0.2-2`
+- old version: `3.0.2-2`
+- new version: `3.2.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## fkie_message_filters (rolling) - 3.2.0-1
 
 The packages in the `fkie_message_filters` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --ros-distro rolling fkie_message_filters` on `Thu, 24 Apr 2025 20:31:25 -0000`
