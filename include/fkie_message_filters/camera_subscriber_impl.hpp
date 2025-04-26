@@ -3,6 +3,7 @@
  * fkie_message_filters
  * Copyright © 2018-2025 Fraunhofer FKIE
  * Author: Timo Röhling
+ * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +59,7 @@ template<template<typename> class Translate>
 void CameraSubscriber<Translate>::subscribe(const rclcpp::Node::SharedPtr& node, const std::string& base_topic,
                                             const rclcpp::QoS& qos,
                                             const std::optional<image_transport::TransportHints>& transport_hints,
-                                            const rclcpp::SubscriptionOptions& options) noexcept
+                                            const rclcpp::SubscriptionOptions& options)
 {
     set_subscribe_options(node, base_topic, qos, transport_hints, options);
     subscribe();
@@ -77,7 +78,7 @@ bool CameraSubscriber<Translate>::is_configured() const noexcept
 }
 
 template<template<typename> class Translate>
-void CameraSubscriber<Translate>::subscribe_impl() noexcept
+void CameraSubscriber<Translate>::subscribe_impl()
 {
     if (!sub_)
     {
@@ -94,7 +95,7 @@ void CameraSubscriber<Translate>::subscribe_impl() noexcept
 }
 
 template<template<typename> class Translate>
-void CameraSubscriber<Translate>::unsubscribe_impl() noexcept
+void CameraSubscriber<Translate>::unsubscribe_impl()
 {
     if (sub_)
         sub_.shutdown();

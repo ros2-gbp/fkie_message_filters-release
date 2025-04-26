@@ -2,6 +2,25 @@
 Changelog for package fkie_message_filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2025-04-24)
+------------------
+* Add Publisher/Subscriber support for custom allocators
+* Add tests with rclcpp_lifecycle nodes
+* Fix overzealous noexcept declarations
+* REUSE 3.3 compliance
+* Migrate to ROS manifest version 3 (REP-149)
+* Contributors: Timo Röhling
+
+3.1.1 (2025-04-18)
+------------------
+* Properly bump the abi namespace (and automate it)
+* Contributors: Timo Röhling
+
+3.1.0 (2025-04-17)
+------------------
+* Support for alternative node implementations via node interfaces
+* Contributors: Timo Röhling
+
 3.0.2 (2025-04-16)
 ------------------
 * Use tf2_ros native function for timestamp conversions
