@@ -1,0 +1,120 @@
+ros-kilted-fkie-message-filters (3.2.0-1noble) noble; urgency=high
+
+  * Add Publisher/Subscriber support for custom allocators
+  * Add tests with rclcpp_lifecycle nodes
+  * Fix overzealous noexcept declarations
+  * REUSE 3.3 compliance
+  * Migrate to ROS manifest version 3 (REP-149)
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Thu, 24 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (3.1.1-1noble) noble; urgency=high
+
+  * Properly bump the abi namespace (and automate it)
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Fri, 18 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (3.1.0-1noble) noble; urgency=high
+
+  * Support for alternative node implementations via node interfaces
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Thu, 17 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (3.0.2-1noble) noble; urgency=high
+
+  * Use tf2_ros native function for timestamp conversions
+  * Inherit additional constructors for Buffer, Sequencer, and TfFilter
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Wed, 16 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (3.0.1-1noble) noble; urgency=high
+
+  * Recheck image_transport version when library is used
+  * Improve exception message for noncopyable types
+  * Enable BUILD_SHARED_LIBS by default
+  * Fix prefix for namespace macro
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Sun, 13 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (3.0.0-1noble) noble; urgency=high
+
+  * Improve test coverage
+  * Add explicit ABI version
+  * Add support for test coverage
+  * Support sanitizer plugings for tests
+  * Add quality declaration
+  * Make Signals class movable
+  * Rename headers from *.h to *.hpp
+  * Use #pragma once to help clangd not choke on _impl headers
+  * Add rosdoc2 configuration
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Tue, 01 Apr 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (2.1.0-1noble) noble; urgency=high
+
+  * Clean up includes
+  * Add logging with configurable ROS logger
+  * Use FKIE_MF as macro prefix (instead of FKIE_MESSAGE_FILTERS)
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Mon, 31 Mar 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (2.0.1-1noble) noble; urgency=high
+
+  * Minor bugfixes for buffer/callback group interaction
+  * Improve support for older image_transport API versions
+  * Add pre-commit hook for code formatting
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Thu, 27 Mar 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (2.0.0-1noble) noble; urgency=high
+
+  * Reimplementation for ROS 2
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Mon, 24 Mar 2025 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (1.1.2-1noble) noble; urgency=high
+
+  * Fix compiler warnings with Clang 9
+  * Fix compilation error due to namespace problems with friend class
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Thu, 03 Sep 2020 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (1.1.1-1noble) noble; urgency=high
+
+  * Fix compilation bug with RosMessage adapter
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Tue, 01 Sep 2020 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (1.1.0-1noble) noble; urgency=high
+
+  * Rewrite documentation
+  * Add test for subscriber callbacks
+  * Use "nullptr" instead of "0"
+  * Add rostest testsuite for tests involving ROS publish/subscribe
+  * Add subscriber status callback support
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Mon, 31 Aug 2020 05:00:00 -0000
+
+ros-kilted-fkie-message-filters (1.0.1-1noble) noble; urgency=high
+
+  * Bugfix for ODR violation
+  * Improve documentation
+  * Rename helper function for more clarity
+  * Reword documentation to be a bit more precise
+  * Contributors: Timo Röhling
+
+ -- Timo Röhling <timo.roehling@fkie.fraunhofer.de>  Wed, 18 Sep 2019 05:00:00 -0000
+
+
