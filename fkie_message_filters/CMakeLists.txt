@@ -20,7 +20,7 @@
 ############################################################################
 
 cmake_minimum_required(VERSION 3.13...3.28)
-project(fkie_message_filters VERSION 3.2.1)
+project(fkie_message_filters VERSION 3.3.0)
 set(FKIE_MF_ABI_VERSION 3)
 
 # Options
@@ -96,6 +96,7 @@ if(BUILD_TESTING)
         test/test_combiner_approximate_time.cpp
         test/test_combiner_exact_time.cpp
         test/test_combiner_fifo.cpp
+        test/test_combiner_latch.cpp
         test/test_divider.cpp
         test/test_filter_loop.cpp
         test/test_helpers.cpp
