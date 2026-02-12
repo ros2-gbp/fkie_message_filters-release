@@ -1,0 +1,12 @@
+Source: ros-jazzy-fkie-message-filters
+Section: misc
+Priority: optional
+Maintainer: Timo Röhling <timo.roehling@fkie.fraunhofer.de>
+Build-Depends: debhelper (>= 9.0.0), ament-cmake, ament-cmake-googletest <!nocheck>, ament-cmake-ros <!nocheck>, ros-jazzy-rclcpp, ros-jazzy-rclcpp-lifecycle <!nocheck>, ros-one-image-transport, ros-one-sensor-msgs, ros-one-std-msgs <!nocheck>, ros-one-tf2-ros, ros-jazzy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-fkie-message-filters
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-rclcpp, ros-one-image-transport, ros-one-sensor-msgs, ros-one-tf2-ros, ros-jazzy-ros-workspace
+Description: Improved ROS message filters
