@@ -1,0 +1,12 @@
+Source: ros-rolling-fkie-message-filters
+Section: misc
+Priority: optional
+Maintainer: Timo Röhling <timo.roehling@fkie.fraunhofer.de>
+Build-Depends: debhelper (>= 9.0.0), ament-cmake, ament-cmake-googletest <!nocheck>, ament-cmake-ros <!nocheck>, ros-one-image-transport, ros-one-sensor-msgs, ros-one-std-msgs <!nocheck>, ros-one-tf2-ros, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle <!nocheck>, ros-rolling-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-rolling-fkie-message-filters
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-one-image-transport, ros-one-sensor-msgs, ros-one-tf2-ros, ros-rolling-rclcpp, ros-rolling-ros-workspace
+Description: Improved ROS message filters
