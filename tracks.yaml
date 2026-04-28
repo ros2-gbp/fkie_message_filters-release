@@ -104,4 +104,5 @@ tracks:
     ros_distro: rolling
     vcs_type: git
     vcs_uri: https://github.com/fkie/message_filters.git
-    version: :{auto}
+    version: 3.3.0
+    version_saved: :{auto}
