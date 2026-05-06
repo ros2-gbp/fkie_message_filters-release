@@ -1,3 +1,26 @@
+## fkie_message_filters (humble) - 3.3.1-1
+
+The packages in the `fkie_message_filters` repository were released into the `humble` distro by running `/usr/bin/bloom-release -r humble fkie_message_filters` on `Wed, 06 May 2026 21:02:40 -0000`
+
+The `fkie_message_filters` package was released.
+
+Version of package(s) in repository `fkie_message_filters`:
+
+- upstream repository: https://github.com/fkie/message_filters.git
+- release repository: https://github.com/ros2-gbp/fkie_message_filters-release.git
+- rosdistro version: `3.3.0-1`
+- old version: `3.3.0-1`
+- new version: `3.3.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.14.3`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## fkie_message_filters (humble) - 3.3.0-1
 
 The packages in the `fkie_message_filters` repository were released into the `humble` distro by running `/usr/bin/bloom-release -r humble fkie_message_filters` on `Thu, 12 Feb 2026 13:34:34 -0000`
