@@ -2,6 +2,12 @@
 Changelog for package fkie_message_filters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.4.0 (2026-06-23)
+------------------
+* Compatibility fixes for image_transport 6.4
+  - This enables full support for alternative node implementations
+* Contributors: Timo Röhling
+
 3.3.1 (2026-05-06)
 ------------------
 * Fix missing include for std::find_if
